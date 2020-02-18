@@ -1,0 +1,7 @@
+node_modules/
+
+# ipfs
+ipfs/data/**
+
+# nodejs
+uploads/*.[mp4,jpg,jpeg,png,avi]
