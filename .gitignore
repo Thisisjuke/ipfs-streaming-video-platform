@@ -4,4 +4,4 @@ node_modules/
 ipfs/data/**
 
 # nodejs
-uploads/*.[mp4,jpg,jpeg,png,avi]
+nodejs/uploads
