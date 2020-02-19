@@ -28,16 +28,18 @@ services:
     networks:
       - backend
 
-#  client:
-#    container_name: vue-client
-#    build: './client'
-#    volumes:
-#      - './client:/home/node/app'
-#    working_dir: '/home/node/app'
-#    command: yarn serve
-#    ports:
-#      - 8000:8000
-#      - 8082:80
+  client:
+    container_name: vue-client
+    build: './front'
+    volumes:
+      - './front:/home/node/app'
+    working_dir: '/home/node/app'
+    command: yarn serve
+    ports:
+      - 8000:8000
+      - 8082:8080
+    networks:
+      - frontend
 
   mongo:
     container_name: mongo
