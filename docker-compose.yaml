@@ -10,3 +10,58 @@ services:
     - "5001:5001"
     - "4001:4001"
     - "8080:8080"
+    networks:
+      - backend
+
+  node:
+    container_name: node_api
+    image: "node:12"
+    working_dir: /home/node/app
+    volumes:
+      - ./nodejs:/home/node/app
+    ports:
+      - "8081:8081"
+    command: "yarn dev"
+    depends_on:
+      - "ipfs"
+      - "mongo"
+    networks:
+      - backend
+
+#  client:
+#    container_name: vue-client
+#    build: './client'
+#    volumes:
+#      - './client:/home/node/app'
+#    working_dir: '/home/node/app'
+#    command: yarn serve
+#    ports:
+#      - 8000:8000
+#      - 8082:80
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+
+  mongo-express:
+    image: mongo-express:latest
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=root
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=root
+    depends_on:
+      - mongo
+    ports:
+      - "8888:8081"
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:

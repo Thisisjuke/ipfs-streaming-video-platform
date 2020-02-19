@@ -1,16 +1,8 @@
 const fs = require('fs');
-const express = require('express')
-const router = express.Router()
+import ipfs from "@/config/ipfs";
+import { fileChecker } from "../helper/fileHelper";
 
-import { upload } from "../helpers/storageHelper";
-import { fileChecker } from "../helpers/fileHelper";
-import ipfs from "../clients/ipfsClient";
-
-router.get('/', function(req, res) {
-    res.send('Upload endpoint!');
-});
-
-router.post('/', upload.single('file'), async (req, res) => {
+const uploadIpfs = async (req, res) => {
     fileChecker(req, res)
 
     const data = fs.readFileSync(req.file.path);
@@ -26,6 +18,6 @@ router.post('/', upload.single('file'), async (req, res) => {
         console.error(err)
         return 'error'
     }
-});
+}
 
-export default router
+export { uploadIpfs }

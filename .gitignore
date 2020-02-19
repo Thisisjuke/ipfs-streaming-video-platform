@@ -4,4 +4,4 @@ node_modules/
 ipfs/data/**
 
 # nodejs
-nodejs/uploads
+nodejs/upload
