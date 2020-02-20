@@ -6,11 +6,17 @@ const routes = [
     path: '/videos',
     name: 'videos',
     component: WatchVideo,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/catalogue',
     name: 'catalogue',
     component: VideoCatalogue,
+    meta: {
+      requiresAuth: true
+    }
   },
 ];
 

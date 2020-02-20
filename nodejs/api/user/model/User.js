@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Please Include your password"]
+        required: [true, "Please Include your password"],
     },
     token: {
         type: String
@@ -47,6 +47,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
     if (!isPasswordMatch) {
         throw new Error({ error: "Invalid login details" });
     }
+
     return user;
 };
 

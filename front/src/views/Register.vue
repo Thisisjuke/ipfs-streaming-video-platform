@@ -39,10 +39,8 @@ export default {
     async registerUser() {
       try {
         const response = await axios.post('http://localhost:8081/user/register', this.register);
-        console.log(response);
         const token = response.data.token;
         if (token) {
-          localStorage.setItem("jwt", token);
           this.$router.push("/login");        }
       } catch (err) {
         console.log(err)

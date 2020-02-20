@@ -1,43 +1,41 @@
 <template>
-  <form @submit.prevent="loginUser">
+  <form @submit.prevent="handleSubmit">
     <input
       type="text"
       placeholder="Email"
-      v-model="login.email"
+      v-model="loginForm.email"
     />
     <input
       type="password"
       placeholder="Password"
-      v-model="login.password"
+      v-model="loginForm.password"
     />
     <button type="submit">Sign in</button>
   </form>
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
 
 export default {
-  data() {
+  data () {
     return {
-      login: {
+      loginForm: {
         email: "",
-        password: ""
+        password: "",
       }
     };
   },
+  computed: {
+    ...mapState('account', ['status'])
+  },
   methods: {
-    async loginUser() {
-      try {
-        console.log(this.login)
-        let response = await axios.post(`http://localhost:8081/user/login`, this.login);
-        let token = response.data.token;
-        localStorage.setItem("jwt", token);
-        if (token) {
-          this.$router.push("/dashboard");
-        }
-      } catch (err) {
-        console.log(err);
+    ...mapActions('account', ['login']),
+    handleSubmit () {
+      if (this.loginForm.email && this.loginForm.password) {
+        this.login(this.loginForm).then(() => {
+          this.$router.push('dashboard')
+        })
       }
     }
   }

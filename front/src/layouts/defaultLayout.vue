@@ -3,7 +3,13 @@
         <sidebar @click='toggleSidebar' :isShow="showSidebar"></sidebar>
         <div id="container" class="h-screen">
             <div class="flex h-full ">
-                <div class='w-full max-h-screen overflow-hidden bg-gray-200 rounded m-4 p-4'>
+                <div v-if="isUserPage()" class="m-4 w-1/5 max-h-screen overflow-hidden bg-white rounded">
+                    <AccountInfo class="p-3" />
+                </div>
+                <div
+                    class='max-h-screen overflow-hidden bg-gray-200 rounded m-4'
+                    :class="[isUserPage() ? 'w-4/5 ml-0' : '', 'w-full']"
+                >
                     <router-view></router-view>
                 </div>
             </div>
@@ -13,23 +19,27 @@
 
 <script>
 
-import Sidebar from '@/components/sidebar/Sidebar.vue';
+  import Sidebar from '@/components/sidebar/Sidebar.vue';
+  import AccountInfo from '@/components/account-info/AccountInfo.vue';
 
-export default {
-  name: 'app',
-  data() {
-    return {
-      containerPosition: 0,
-      showSidebar: false,
-    };
-  },
-  components: { Sidebar },
-  methods: {
-    toggleSidebar() {
-      this.showSidebar = !this.showSidebar;
+  export default {
+    name: 'app',
+    data() {
+      return {
+        containerPosition: 0,
+        showSidebar: false,
+      };
     },
-  },
-};
+    components: { AccountInfo, Sidebar },
+    methods: {
+      toggleSidebar() {
+        this.showSidebar = !this.showSidebar;
+      },
+      isUserPage() {
+        return 'profile' === this.$router.currentRoute.name
+      }
+    },
+  };
 </script>
 
 <style scoped>

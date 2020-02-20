@@ -28,9 +28,10 @@ exports.loginUser = async (req, res) => {
         if (!user) {
             return res.status(401).json({ error: "Login failed! Check authentication credentials" });
         }
-        console.log(user)
         const token = await user.generateAuthToken();
-        res.status(201).json({ user, token });
+        const profile = user.toJSON()
+        delete profile.password
+        res.status(201).json({ user: profile, token });
     } catch (err) {
         res.status(400).json({ err: err });
     }

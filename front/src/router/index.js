@@ -1,39 +1,35 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import jwtDecode from 'jwt-decode';
 
 import defaultLayout from '@/layouts/defaultLayout.vue';
 import loginLayout from '@/layouts/loginLayout.vue';
-import userLayout from '@/layouts/userLayout.vue';
 
 import dashboardRoutes from '@/router/dashboard';
 import authRoutes from '@/router/auth';
 import profileRoutes from '@/router/profile';
 import videoRoutes from '@/router/videos';
-
 import Home from '@/views/Home.vue';
+
+import store from '@/store'
 
 Vue.use(Router);
 
 const router = new Router({
   mode: 'history',
-  routes: [{
-    component: defaultLayout,
-    path: '',
-    children: [
-      {
-        path: '/',
-        name: 'Home',
-        component: Home,
-      },
-      ...dashboardRoutes,
-      ...videoRoutes,
-    ],
-  },
+  routes: [
     {
-      component: userLayout,
+      component: defaultLayout,
       path: '',
       children: [
+        {
+          path: '/',
+          name: 'Home',
+          component: Home,
+        },
+        ...dashboardRoutes,
         ...profileRoutes,
+        ...videoRoutes,
       ],
     },
     {
@@ -47,7 +43,14 @@ const router = new Router({
         },
         ...authRoutes,
       ],
-    }],
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("jwt") !== null) {
+          next('/')
+        }
+      }
+    },
+    { path: '*', redirect: '/' },
+  ],
 })
 
 router.beforeEach((to, from, next) => {
@@ -56,9 +59,12 @@ router.beforeEach((to, from, next) => {
       next({
         path: "/login"
       });
-    } else {
-      next();
+    } else if (!store.getters['account/userInfos']) {
+      const token = localStorage.getItem("jwt")
+      const user = jwtDecode(token)
+      store.commit('account/USER_DATA_FROM_JWT', user)
     }
+    next();
   } else {
     next();
   }

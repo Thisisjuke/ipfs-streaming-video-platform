@@ -24,8 +24,8 @@ export default {
     .category-row {
         height: 4vw;
     }
-    .text-row {
-
+    .category-row:hover {
+        background-color: #373D48;
     }
     .icon-size {
         height: 4vw;

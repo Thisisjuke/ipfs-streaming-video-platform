@@ -11,11 +11,8 @@
             <div class="mt-1 ml-2 text-sm text-left text-white">Most viewed videos last month :</div>
             <ListRowsIcons :rows="rows" />
             <div class="mt-4 mx-2 flex">
-                <button class="w-1/3 mx-1 button bg-gray-200 text-gray-700 text-white text-xs rounded-full text-center px-3 py-1">
+                <button class="w-full mx-1 button bg-gray-200 text-gray-700 text-white text-xs rounded-full text-center px-3 py-1">
                     SEE MORE
-                </button>
-                <button class="w-2/3 mx-1 button bg-gray-200 text-gray-700 text-white text-xs rounded-full text-center px-3 py-1 text-purple">
-                    ADD A NEW VIDEO
                 </button>
             </div>
         </div>
@@ -23,7 +20,7 @@
 </template>
 
 <script>
-import ListRowsIcons from '@/components/ListRowsIcons.vue';
+import ListRowsIcons from '@/components/metrics/ListRowsIcons.vue';
 
 export default {
   name: 'AccountAnalytics',
