@@ -1,4 +1,5 @@
 const User = require("../model/User");
+const uuidAPIKey = require('uuid-apikey');
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -7,14 +8,17 @@ exports.registerNewUser = async (req, res) => {
                 message: "Email already in use"
             });
         }
+        const apiKey = uuidAPIKey.create();
         const user = new User({
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            apiKey
         });
+        console.log(user)
         const data = await user.save();
         const token = await user.generateAuthToken();
-        res.status(201).json({ data, token });
+        res.status(201).json({ data, token, apiKey });
     } catch (err) {
         res.status(400).json({ err: err });
     }

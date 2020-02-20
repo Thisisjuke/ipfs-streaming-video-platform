@@ -19,14 +19,14 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      component: Home,
+    },
+    {
       component: defaultLayout,
       path: '',
-      children: [
-        {
-          path: '/',
-          name: 'Home',
-          component: Home,
-        },
+      children: [,
         ...dashboardRoutes,
         ...profileRoutes,
         ...videoRoutes,
@@ -36,18 +36,8 @@ const router = new Router({
       component: loginLayout,
       path: '',
       children: [
-        {
-          path: '/',
-          name: 'Home',
-          component: Home,
-        },
         ...authRoutes,
       ],
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("jwt") !== null) {
-          next('/')
-        }
-      }
     },
     { path: '*', redirect: '/' },
   ],
@@ -59,7 +49,8 @@ router.beforeEach((to, from, next) => {
       next({
         path: "/login"
       });
-    } else if (!store.getters['account/userInfos']) {
+    }
+    if (localStorage.getItem("jwt") && !store.getters['account/userInfos']) {
       const token = localStorage.getItem("jwt")
       const user = jwtDecode(token)
       store.commit('account/USER_DATA_FROM_JWT', user)

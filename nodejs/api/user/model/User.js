@@ -4,6 +4,15 @@ const jwt = require("jsonwebtoken");
 
 const config = require("../../../config/mongodb");
 
+const keysSchema = mongoose.Schema({
+    uuid: {
+        type: String,
+    },
+    apiKey: {
+        type: String,
+    }
+})
+
 const userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -19,7 +28,8 @@ const userSchema = mongoose.Schema({
     },
     token: {
         type: String
-    }
+    },
+    apiKey: keysSchema
 });
 
 userSchema.pre("save", async function(next) {
