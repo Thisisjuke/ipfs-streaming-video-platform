@@ -25,6 +25,7 @@ exports.registerNewUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
+    console.log(req.headers.authorization);
     try {
         const email = req.body.email;
         const password = req.body.password;

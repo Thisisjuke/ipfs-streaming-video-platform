@@ -1,4 +1,5 @@
 import userApi from '@/api/user';
+import router from '@/router';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const state = user
@@ -12,6 +13,7 @@ const actions = {
         userApi.login(inputForm)
             .then(user => {
                 commit('USER_LOGIN_SUCCESS', user);
+                router.push('dashboard')
             }).catch(()=>{
                 commit('USER_LOGIN_FAILURE', user);
             });

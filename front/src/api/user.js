@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/client/axios.js';
 
 export default {
     login,
@@ -6,12 +6,14 @@ export default {
 };
 
 async function login(data) {
-    const userData = await axios.post('http://localhost:8081/user/login', data)
-    if(userData) {
-        const token = userData.data.token;
-        localStorage.setItem("jwt", token)
-    }
-    return userData.data.user
+    await axios.post('user/login', data)
+        .then((userData) => {
+            if(userData) {
+                const token = userData.data.token;
+                localStorage.setItem("jwt", token)
+            }
+            return userData.data.user
+        })
 }
 
 function logout() {

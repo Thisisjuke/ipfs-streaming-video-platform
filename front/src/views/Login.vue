@@ -31,11 +31,9 @@ export default {
   },
   methods: {
     ...mapActions('account', ['login']),
-    handleSubmit () {
+    async handleSubmit () {
       if (this.loginForm.email && this.loginForm.password) {
-        this.login(this.loginForm).then(() => {
-          this.$router.push('dashboard')
-        })
+        this.login(this.loginForm)
       }
     }
   }
