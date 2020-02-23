@@ -1,3 +1,40 @@
 @tailwind base;
+
+h1 {
+    @apply text-2xl font-bold text-left;
+    color: #4a4e4d;
+    width: 100%;
+}
+h2 {
+    @apply text-xl;
+}
+h3 {
+    @apply text-sm text-left;
+    color: #4a4e4d;
+    width: 100%;
+}
+
+label {
+    @apply text-left text-sm;
+    color: #4a4e4d;
+}
+
+.btn-primary {
+    @apply text-xs text-white py-2 px-20 rounded;
+    background-color: #2c7872;
+}
+.btn-primary:hover {
+    background-color: #52908B;
+}
+.btn-secondary {
+    @apply text-xs py-2 px-6 rounded bg-white;
+    color: #2c7872;
+    border: 1px solid #2c7872;
+}
+.btn-secondary:hover {
+    color: white;
+    background-color: #2c7872;
+}
+
 @tailwind components;
 @tailwind utilities;

@@ -7,7 +7,7 @@
                     <AccountInfo class="p-3" />
                 </div>
                 <div
-                    class='max-h-screen overflow-hidden bg-gray-200 rounded m-4'
+                    class='max-h-screen overflow-hidden bg-gray-200 rounded m-3 p-3'
                     :class="[isUserPage() ? 'w-4/5 ml-0' : '', 'w-full']"
                 >
                     <router-view></router-view>
