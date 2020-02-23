@@ -50,28 +50,28 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  data () {
+  data() {
     return {
       loginForm: {
-        email: "",
-        password: "",
-      }
+        email: '',
+        password: '',
+      },
     };
   },
   computed: {
-    ...mapState('account', ['status'])
+    ...mapState('account', ['status']),
   },
   methods: {
     ...mapActions('account', ['login']),
-    async handleSubmit () {
+    async handleSubmit() {
       if (this.loginForm.email && this.loginForm.password) {
-        this.login(this.loginForm)
+        this.login(this.loginForm);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

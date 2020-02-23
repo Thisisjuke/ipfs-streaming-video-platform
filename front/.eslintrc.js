@@ -13,6 +13,7 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'max-len': 'off',
     'import/extensions': 'off',
+    'no-shadow': 'off',
   },
   parserOptions: {
     parser: 'babel-eslint',

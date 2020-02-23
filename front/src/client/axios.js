@@ -5,18 +5,19 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-    config => {
-      const user = localStorage.getItem('jwt');
+  (config) => {
+    const instanceConfig = config;
+    const user = localStorage.getItem('jwt');
 
-      if (user) {
-        config.headers["Authorization"] = "bearer " + user;
-      } else {
-        config.headers["Authorization"] = "bearer here if jwt set";
-      }
+    if (user) {
+      instanceConfig.headers.Authorization = `bearer ${user}`;
+    } else {
+      instanceConfig.headers.Authorization = 'bearer here if jwt set';
+    }
 
-      return config;
-    },
-    error => Promise.reject(error)
+    return config;
+  },
+  error => Promise.reject(error),
 );
 
 export default axiosInstance;

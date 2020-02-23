@@ -99,24 +99,25 @@ export default {
   data() {
     return {
       register: {
-        name: "",
-        email: "",
-        password: ""
-      }
+        name: '',
+        email: '',
+        password: '',
+      },
     };
   },
   methods: {
     async registerUser() {
       try {
         const response = await axios.post('http://localhost:8081/user/register', this.register);
-        const token = response.data.token;
+        const { token } = response.data;
         if (token) {
-          this.$router.push("/login");        }
+          this.$router.push('/login');
+        }
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -133,4 +134,3 @@ export default {
   line-height: 2.25;
 }
 </style>
-

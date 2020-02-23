@@ -6,8 +6,8 @@ const routes = [
     name: 'dashboard',
     component: Dashboard,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
 ];
 

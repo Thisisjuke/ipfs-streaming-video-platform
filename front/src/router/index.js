@@ -11,8 +11,6 @@ import profileRoutes from '@/router/profile';
 import videoRoutes from '@/router/videos';
 import Home from '@/views/Home.vue';
 
-import store from '@/store'
-
 Vue.use(Router);
 
 const router = new Router({
@@ -26,7 +24,7 @@ const router = new Router({
     {
       component: defaultLayout,
       path: '',
-      children: [,
+      children: [
         ...dashboardRoutes,
         ...profileRoutes,
         ...videoRoutes,
@@ -41,19 +39,20 @@ const router = new Router({
     },
     { path: '*', redirect: '/' },
   ],
-})
+});
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem("jwt") == null) {
+    if (localStorage.getItem('jwt') == null) {
       next({
-        path: "/login"
+        path: '/login',
       });
     }
-    if (localStorage.getItem("jwt") && !store.getters['account/userInfos']) {
-      const token = localStorage.getItem("jwt")
-      const user = jwtDecode(token)
-      store.commit('account/USER_DATA_FROM_JWT', user)
+    console.log(router.app.$store);
+    if (localStorage.getItem('jwt') && !router.app.$store.getters['account/userInfos']) {
+      const token = localStorage.getItem('jwt');
+      const user = jwtDecode(token);
+      router.app.$store.commit('account/USER_DATA_FROM_JWT', user);
     }
     next();
   } else {
