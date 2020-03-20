@@ -11,6 +11,8 @@ import profileRoutes from '@/router/profile';
 import videoRoutes from '@/router/videos';
 import Home from '@/views/Home.vue';
 
+import store from '@/store';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -48,11 +50,10 @@ router.beforeEach((to, from, next) => {
         path: '/login',
       });
     }
-    console.log(router.app.$store);
-    if (localStorage.getItem('jwt') && !router.app.$store.getters['account/userInfos']) {
+    if (localStorage.getItem('jwt') && !store.getters['account/userInfos']) {
       const token = localStorage.getItem('jwt');
       const user = jwtDecode(token);
-      router.app.$store.commit('account/USER_DATA_FROM_JWT', user);
+      store.commit('account/USER_DATA_FROM_JWT', user);
     }
     next();
   } else {

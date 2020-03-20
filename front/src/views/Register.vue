@@ -16,6 +16,19 @@
         <h3>Your private video player</h3>
       </div>
 
+      <div class="w-full mb-4 px-2">
+        <label class="block mb-2" for="name">
+          Your name
+        </label>
+        <input
+              class="appearance-none border w-full py-2 px-3 text-gray-700 leading-tight"
+              id="name"
+              type="text"
+              placeholder="John Smith"
+              v-model="register.name"
+        />
+      </div>
+
       <div class="w-1/2 px-2">
         <label class="block mb-2" for="company">
           Company Name :

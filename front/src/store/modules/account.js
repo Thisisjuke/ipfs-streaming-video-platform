@@ -28,7 +28,7 @@ const actions = {
     userApi.register(user)
       .then((user) => {
         commit('USER_REGISTER_SUCCESS', user);
-        this.$router.push('/login');
+        router.push('/login');
       })
       .catch(() => {
         commit('USER_REGISTER_FAILURE', user);

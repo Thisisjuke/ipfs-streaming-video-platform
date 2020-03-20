@@ -15,7 +15,6 @@ exports.registerNewUser = async (req, res) => {
             password: req.body.password,
             apiKey
         });
-        console.log(user)
         const data = await user.save();
         const token = await user.generateAuthToken();
         res.status(201).json({ data, token, apiKey });
